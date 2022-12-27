@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
 import 'package:intl/intl.dart';
@@ -190,6 +192,7 @@ class _CalculatorState extends State<Calculator> {
                     ontap: () {
                       setState(() {
                         evaluate();
+                        expr=curr;
                       });
                     },
                     bttnTxt: buttons[index],
