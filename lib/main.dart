@@ -131,106 +131,76 @@ class _CalculatorState extends State<Calculator> {
                       txtColor: Colors.black,
                     );
                   }
-                  //+/- bttn
-                  else if (index == 1) {
+                  //  (+/-) (%) (DEL) (EQL)bttn
+                  else if (index == 1 ||
+                      index == 2 ||
+                      index == 18 ||
+                      index == 19) {
                     return Bttn(
                       ontap: () {
                         setState(() {
-                          if (curr[0] == '-') {
+                          if (index == 1) {
+                            if (curr[0] == '-') {
+                              expr =
+                                  expr.substring(0, expr.length - curr.length);
+                              curr = curr.substring(1);
+                              expr += curr;
+                            } else {
+                              expr =
+                                  expr.substring(0, expr.length - curr.length);
+                              curr = '-$curr';
+                              expr += curr;
+                            }
+                          } else if (index == 2) {
+                            val = double.parse(curr);
                             expr = expr.substring(0, expr.length - curr.length);
-                            curr = curr.substring(1);
+                            val = val / 100;
+                            curr = val.toString();
                             expr += curr;
-                          } else {
-                            expr = expr.substring(0, expr.length - curr.length);
-                            curr = '-$curr';
-                            expr += curr;
+                          } else if (index == 18) {
+                            if (curr == '0') {
+                            } else {
+                              expr = expr.substring(0, expr.length - 1);
+                              curr = curr.substring(0, curr.length - 1);
+                              if (curr == '') {
+                                curr = '0';
+                              }
+                            }
+                          } else if (index == 19) {
+                            evaluate(expr);
+                            expr = curr;
+                            flag1 = 0;
                           }
                         });
                       },
                       bttnTxt: buttons[index],
                       color: Colors.grey[700],
-                      txtColor: Colors.black,
-                    );
-                  }
-                  //% bttn
-                  else if (index == 2) {
-                    return Bttn(
-                      ontap: () {
-                        setState(() {
-                          val = double.parse(curr);
-                          expr = expr.substring(0, expr.length - curr.length);
-                          val = val / 100;
-                          curr = val.toString();
-                          expr += curr;
-                        });
-                      },
-                      bttnTxt: buttons[index],
-                      color: Colors.grey[700],
-                      txtColor: Colors.black,
-                    );
-                  }
-                  //DEL bttn
-                  else if (index == 18) {
-                    return Bttn(
-                      ontap: () {
-                        setState(() {
-                          if (curr == '') {
-                          } else {
-                            expr = expr.substring(0, expr.length - 1);
-                            curr = curr.substring(0, curr.length - 1);
-                          }
-                        });
-                      },
-                      bttnTxt: buttons[index],
-                      color: Colors.grey[400],
-                      txtColor: Colors.black,
-                    );
-                  }
-                  //equal bttn
-                  else if (index == 19) {
-                    return Bttn(
-                      ontap: () {
-                        setState(() {
-                          evaluate(expr);
-                          expr = curr;
-                          flag1 = 0;
-                        });
-                      },
-                      bttnTxt: buttons[index],
-                      color: Colors.grey[700],
-                      txtColor: Colors.black,
-                    );
-                  } else if (index == 17) {
-                    return Bttn(
-                      ontap: () {
-                        setState(() {
-                          if (flag1 == 0) {
-                            expr += buttons[index];
-                            curr += buttons[index];
-                            flag1 = 1;
-                          }
-                        });
-                      },
-                      bttnTxt: buttons[index],
-                      color: Colors.grey[400],
                       txtColor: Colors.black,
                     );
                   } else {
                     return Bttn(
                       ontap: () {
                         setState(() {
-                          if (isOpr(buttons[index]) && flag == 0) {
-                            expr += buttons[index];
-                            flag = 1;
-                            flag1 = 0;
-                          } else if (!(isOpr(buttons[index]))) {
-                            expr += buttons[index];
-                            if (curr == '0' || flag == 1) {
-                              curr = '';
+                          if (index == 17) {
+                            if (flag1 == 0) {
+                              expr += buttons[index];
+                              curr += buttons[index];
+                              flag1 = 1;
+                            }
+                          } else {
+                            if (isOpr(buttons[index]) && flag == 0) {
+                              expr += buttons[index];
+                              flag = 1;
+                              flag1 = 0;
+                            } else if (!(isOpr(buttons[index]))) {
+                              expr += buttons[index];
+                              if (curr == '0' || flag == 1) {
+                                curr = '';
+                                flag = 0;
+                              }
+                              curr += buttons[index];
                               flag = 0;
                             }
-                            curr += buttons[index];
-                            flag = 0;
                           }
                         });
                       },
