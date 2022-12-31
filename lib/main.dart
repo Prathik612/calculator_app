@@ -221,7 +221,7 @@ class _CalculatorState extends State<Calculator> {
   }
 
   bool isOpr(String x) {
-    if (x == '÷' || x == 'x' || x == '-' || x == '+' || x == '=') {
+    if (x == '÷' || x == 'x' || x == '-' || x == '=' || x == '+') {
       return true;
     }
     return false;
