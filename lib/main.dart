@@ -141,14 +141,19 @@ class _CalculatorState extends State<Calculator> {
                               flag1 = 1;
                             }
                           } else {
+                            //initial oprator press
                             if (isOpr(buttons[index]) && flag == 0) {
                               expr += buttons[index];
                               flag = 1;
                               flag1 = 0;
-                            } else if (isOpr(buttons[index]) && flag == 1) {
+                            }
+                            //consecutive operator press (replaces prev. operator) 
+                            else if (isOpr(buttons[index]) && flag == 1) {
                               expr = expr.substring(0, expr.length - 1);
                               expr += buttons[index];
-                            } else if (!(isOpr(buttons[index]))) {
+                            }
+                            //number buttons 
+                            else if (!(isOpr(buttons[index]))) {
                               expr += buttons[index];
                               if (curr == '0' || flag == 1) {
                                 curr = '';
