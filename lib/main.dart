@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:calculator/Widgets/bttn.dart';
 import 'package:calculator/utils/utils.dart';
@@ -68,10 +70,9 @@ class _CalculatorState extends State<Calculator> {
                       child: Text(
                         curr,
                         style: const TextStyle(
-                          fontSize: 47,
-                          color: Colors.black,
-                          overflow: TextOverflow.ellipsis
-                        ),
+                            fontSize: 47,
+                            color: Colors.black,
+                            overflow: TextOverflow.ellipsis),
                       ),
                     )
                   ],
@@ -143,17 +144,20 @@ class _CalculatorState extends State<Calculator> {
                           } else {
                             //initial oprator press
                             if (isOpr(buttons[index]) && flag == 0) {
+                              counterHist = counter;
+                              counter = 13;
                               expr += buttons[index];
                               flag = 1;
                               flag1 = 0;
                             }
-                            //consecutive operator press (replaces prev. operator) 
+                            //consecutive operator press (replaces prev. operator)
                             else if (isOpr(buttons[index]) && flag == 1) {
                               expr = expr.substring(0, expr.length - 1);
                               expr += buttons[index];
                             }
-                            //number buttons 
-                            else if (!(isOpr(buttons[index]))) {
+                            //number buttons
+                            else if (!(isOpr(buttons[index])) && counter > 0) {
+                              counter--;
                               expr += buttons[index];
                               if (curr == '0' || flag == 1) {
                                 curr = '';

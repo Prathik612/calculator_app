@@ -50,7 +50,7 @@
     }
     final f = NumberFormat();
     f.minimumFractionDigits = 0;
-    // f.maximumFractionDigits = 10;
+    //  f.maximumFractionDigits = 10;
     f.maximumSignificantDigits = 13;
     f.maximumIntegerDigits=13;
     curr = f.format(val);

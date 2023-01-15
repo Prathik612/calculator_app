@@ -5,6 +5,7 @@ import 'logic_provider.dart';
 class ButtonProvider {
   //clears expr and curr
   static void acButton() {
+    counter = 13;
     expr = '';
     curr = '0';
   }
@@ -35,10 +36,17 @@ class ButtonProvider {
   static void delete() {
     if (curr == '0') {
     } else {
-      expr = expr.substring(0, expr.length - 1);
-      curr = curr.substring(0, curr.length - 1);
-      if (curr == '') {
-        curr = '0';
+      if (isOpr(expr[expr.length - 1])) {
+        flag=0;
+        counter = counterHist;
+        expr = expr.substring(0, expr.length - 1);
+      } else {
+        counter++;
+        expr = expr.substring(0, expr.length - 1);
+        curr = curr.substring(0, curr.length - 1);
+        if (curr == '') {
+          curr = '0';
+        }
       }
     }
   }
@@ -48,5 +56,6 @@ class ButtonProvider {
     evaluate(expr);
     expr = curr;
     flag1 = 0;
-  }  
+    counter = 13;
+  }
 }
